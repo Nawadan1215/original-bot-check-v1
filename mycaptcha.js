@@ -1,12 +1,12 @@
 window.MyCaptcha = {
-  // ウィジェットをレンダリング
+  
   render: function(elementId, options = {}) {
     const element = document.getElementById(elementId);
     if (!element) {
       console.error('MyCaptcha: Element not found');
       return;
     }
-    // ボタンとモーダルを追加
+    
     element.innerHTML = `
       <button id="captcha-button-${elementId}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
         私はロボットではありません
@@ -25,13 +25,13 @@ window.MyCaptcha = {
         </div>
       </div>
     `;
-    // イベントリスナーを追加（競合を防ぐため一度だけ）
+    
     const button = document.getElementById(`captcha-button-${elementId}`);
     if (button && !button._eventAttached) {
       button.addEventListener('click', () => MyCaptcha.showModal(elementId));
-      button._eventAttached = true; // フラグで重複防止
+      button._eventAttached = true; 
     }
-    // Enterキーで検証
+    
     const input = document.getElementById(`user-input-${elementId}`);
     if (input && !input._eventAttached) {
       input.addEventListener('keypress', (e) => {
@@ -43,7 +43,6 @@ window.MyCaptcha = {
     }
   },
 
-  // ランダムな6文字を生成
   generateRandomText: function() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
@@ -53,7 +52,6 @@ window.MyCaptcha = {
     return result;
   },
 
-  // モーダルを表示
   showModal: function(elementId) {
     document.getElementById(`modal-overlay-${elementId}`).style.display = 'block';
     document.getElementById(`modal-content-${elementId}`).style.display = 'block';
@@ -64,27 +62,25 @@ window.MyCaptcha = {
     document.getElementById(`user-input-${elementId}`).focus();
   },
 
-  // モーダルを閉じる
   closeModal: function(elementId) {
     document.getElementById(`modal-overlay-${elementId}`).style.display = 'none';
     document.getElementById(`modal-content-${elementId}`).style.display = 'none';
   },
 
-  // 入力検証
   verifyInput: function(elementId) {
     const userInput = document.getElementById(`user-input-${elementId}`).value.trim();
     const randomText = document.getElementById(`random-text-${elementId}`).textContent;
     if (userInput === randomText) {
-      // 成功
+     
       document.getElementById(`status-message-${elementId}`).textContent = '成功！検証が完了しました！';
       document.getElementById(`status-message-${elementId}`).classList.add('text-green-500');
       document.getElementById(`captcha-button-${elementId}`).disabled = true;
       this.closeModal(elementId);
-      // 成功時にカスタムイベントを発火（送信ボタン不要対応）
+      
       const event = new Event('mycaptchaSuccess');
       document.getElementById(elementId).dispatchEvent(event);
     } else {
-      // エラー
+      
       document.getElementById(`error-message-${elementId}`).textContent = '入力が間違っています。もう一度お試しください。';
       document.getElementById(`user-input-${elementId}`).value = '';
     }
