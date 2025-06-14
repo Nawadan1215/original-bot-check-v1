@@ -4,22 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyCaptcha デモ</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="text-center">
     <h1 class="text-3xl font-bold mb-4">MyCaptcha デモ</h1>
-    <form>
-      <div id="mycaptcha"></div>
-      <button type="submit" class="mt-4 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600">送信</button>
-    </form>
+    <div id="mycaptcha"></div>
   </div>
-  <!-- MyCaptchaスクリプト（GitHub RawまたはCDNで提供予定） -->
   <script src="mycaptcha.js"></script>
   <script>
-    // MyCaptchaをレンダリング
     MyCaptcha.render('mycaptcha');
+    // 成功イベントをキャッチ（例: コンソールログ）
+    document.getElementById('mycaptcha').addEventListener('mycaptchaSuccess', () => {
+      console.log('MyCaptcha検証成功！ここで次のアクションを設定可能！');
+      // 例: フォーム送信や別の処理
+    });
   </script>
 </body>
 </html>
