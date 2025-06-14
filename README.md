@@ -12,7 +12,7 @@ GitHub Pagesでデモを試す！
 インストール
 1. スクリプトをHTMLに追加
 以下の<script>タグを<head>または<body>に貼り付けます。
-`<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/Nawadan1215/my-captcha@latest/client/mycaptcha.js"></script>`
 
 注: Tailwind CSSを使用しているので、デザインを維持したい場合は追加。
 `<script src="https://cdn.tailwindcss.com"></script>`
