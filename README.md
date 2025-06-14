@@ -13,13 +13,15 @@ GitHub Pagesでデモを試す！
 以下の手順で、MyCaptchaをあなたのウェブサイトに追加できます！
 1. スクリプトをHTMLに追加
 以下の<script>タグを<head>または<body>に貼り付けます。CDN（jsDelivr）経由で提供しています。
-<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>
+```<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>```
 
 注: Tailwind CSSを使用しているので、必要に応じて以下も追加してください（オプション）。
-<script src="https://cdn.tailwindcss.com"></script>
+```<script src="https://cdn.tailwindcss.com"></script>```
 
 2. HTMLにMyCaptchaを埋め込む
-フォーム内に<div id="mycaptcha"></div>を追加し、JavaScriptでMyCaptcha.renderを呼び出します。
+フォーム内に
+```
+<div id="mycaptcha"></div>を追加し、JavaScriptでMyCaptcha.renderを呼び出します。
 <form action="/submit" method="POST">
   <div id="mycaptcha"></div>
   <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">送信</button>
@@ -27,7 +29,7 @@ GitHub Pagesでデモを試す！
 <script>
   MyCaptcha.render('mycaptcha');
 </script>
-
+```
 使い方
 
 設置: 上記のコードをHTMLにコピペ。
@@ -43,6 +45,7 @@ GitHub Pagesでデモを試す！
 
 コード例（フル）
 以下の完全な例をコピペすれば、すぐに動きます！
+```
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -65,10 +68,10 @@ GitHub Pagesでデモを試す！
   </script>
 </body>
 </html>
-
+```
 カスタマイズ
 
-ID変更: <div id="mycaptcha">のIDを任意のものに変更可能（例: MyCaptcha.render('custom-id')）。
+ID変更:``` <div id="mycaptcha">```のIDを任意のものに変更可能（例: ```MyCaptcha.render('custom-id')```）。
 スタイル: Tailwind CSSをカスタマイズ、または独自のCSSでボタンやモーダルを装飾。
 トークン: フォームに追加されるmycaptcha-tokenをサーバーで検証（詳細は将来のAPI化を参照）。
 
