@@ -6,16 +6,16 @@ MyCaptcha
 GitHub Pagesでデモを見る
 インストール
 
-以下のスクリプトをHTMLに追加:<script src="https://cdn.jsdelivr.net/gh/username/my-captcha/client/mycaptcha.js"></script>
+以下のスクリプトをHTMLに追加:`<script src="https://cdn.jsdelivr.net/gh/username/my-captcha/client/mycaptcha.js"></script>`
 
 
-HTMLに以下を追加:<form>
-  <div id="mycaptcha"></div>
-  <button type="submit">送信</button>
-</form>
-<script>
+HTMLに以下を追加:`<form>`
+  `<div id="mycaptcha"></div>`
+  `<button type="submit">送信</button>`
+`</form>`
+`<script>
   MyCaptcha.render('mycaptcha');
-</script>
+</script>`
 
 
 
