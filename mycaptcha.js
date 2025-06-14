@@ -6,15 +6,13 @@ window.MyCaptcha = {
       console.error('MyCaptcha: Element not found');
       return;
     }
-    // ボタンを追加
+    // ボタンとモーダルを追加
     element.innerHTML = `
       <button id="captcha-button-${elementId}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
         私はロボットではありません
       </button>
       <p id="status-message-${elementId}" class="mt-4 text-lg font-semibold"></p>
-      <!-- モーダルオーバーレイ -->
       <div id="modal-overlay-${elementId}" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 10;"></div>
-      <!-- モーダルコンテンツ -->
       <div id="modal-content-${elementId}" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;" class="bg-white p-6 rounded-lg shadow-lg w-80">
         <h2 class="text-xl font-bold mb-4">検証</h2>
         <p class="mb-2">以下の文字を入力してください:</p>
@@ -27,14 +25,22 @@ window.MyCaptcha = {
         </div>
       </div>
     `;
-    // ボタンにイベントリスナーを追加
-    document.getElementById(`captcha-button-${elementId}`).addEventListener('click', () => MyCaptcha.showModal(elementId));
+    // イベントリスナーを追加（競合を防ぐため一度だけ）
+    const button = document.getElementById(`captcha-button-${elementId}`);
+    if (button && !button._eventAttached) {
+      button.addEventListener('click', () => MyCaptcha.showModal(elementId));
+      button._eventAttached = true; // フラグで重複防止
+    }
     // Enterキーで検証
-    document.getElementById(`user-input-${elementId}`).addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        MyCaptcha.verifyInput(elementId);
-      }
-    });
+    const input = document.getElementById(`user-input-${elementId}`);
+    if (input && !input._eventAttached) {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          MyCaptcha.verifyInput(elementId);
+        }
+      });
+      input._eventAttached = true;
+    }
   },
 
   // ランダムな6文字を生成
@@ -49,12 +55,12 @@ window.MyCaptcha = {
 
   // モーダルを表示
   showModal: function(elementId) {
-    const randomText = MyCaptcha.generateRandomText();
+    document.getElementById(`modal-overlay-${elementId}`).style.display = 'block';
+    document.getElementById(`modal-content-${elementId}`).style.display = 'block';
+    const randomText = this.generateRandomText();
     document.getElementById(`random-text-${elementId}`).textContent = randomText;
     document.getElementById(`user-input-${elementId}`).value = '';
     document.getElementById(`error-message-${elementId}`).textContent = '';
-    document.getElementById(`modal-overlay-${elementId}`).style.display = 'block';
-    document.getElementById(`modal-content-${elementId}`).style.display = 'block';
     document.getElementById(`user-input-${elementId}`).focus();
   },
 
@@ -73,16 +79,10 @@ window.MyCaptcha = {
       document.getElementById(`status-message-${elementId}`).textContent = '成功！検証が完了しました！';
       document.getElementById(`status-message-${elementId}`).classList.add('text-green-500');
       document.getElementById(`captcha-button-${elementId}`).disabled = true;
-      MyCaptcha.closeModal(elementId);
-      // フォームにトークンを追加（将来のAPI化用）
-      const form = document.getElementById(`captcha-button-${elementId}`).closest('form');
-      if (form) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'mycaptcha-token';
-        input.value = 'verified-' + randomText;
-        form.appendChild(input);
-      }
+      this.closeModal(elementId);
+      // 成功時にカスタムイベントを発火（送信ボタン不要対応）
+      const event = new Event('mycaptchaSuccess');
+      document.getElementById(elementId).dispatchEvent(event);
     } else {
       // エラー
       document.getElementById(`error-message-${elementId}`).textContent = '入力が間違っています。もう一度お試しください。';
