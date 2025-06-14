@@ -12,18 +12,19 @@ GitHub Pagesでデモを試す！
 インストール
 1. スクリプトをHTMLに追加
 以下の<script>タグを<head>または<body>に貼り付けます。
-<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>
+`<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>`
 
 注: Tailwind CSSを使用しているので、デザインを維持したい場合は追加。
-<script src="https://cdn.tailwindcss.com"></script>
+`<script src="https://cdn.tailwindcss.com"></script>`
 
 2. HTMLにMyCaptchaを埋め込む
-<div id="mycaptcha"></div>を追加し、MyCaptcha.renderを呼び出します。
+`<div id="mycaptcha"></div>`を追加し、MyCaptcha.renderを呼び出します。
+```
 <div id="mycaptcha"></div>
 <script>
   MyCaptcha.render('mycaptcha');
 </script>
-
+```
 使い方
 
 設置: 上記のコードをHTMLにコピペ。
@@ -64,7 +65,7 @@ GitHub Pagesでデモを試す！
 ```
 カスタマイズ
 
-ID変更: <div id="mycaptcha">を任意のIDに変更（例: MyCaptcha.render('custom-id')）。
+ID変更: `<div id="mycaptcha">`を任意のIDに変更（例: `MyCaptcha.render('custom-id')`）。
 スタイル: Tailwind CSSでカスタマイズ、または独自CSSを適用。
 イベント処理: mycaptchaSuccessで任意のロジックを実装。
 
@@ -79,7 +80,7 @@ ID変更: <div id="mycaptcha">を任意のIDに変更（例: MyCaptcha.render('c
 
 開発者向け
 
-リポジトリ: github.com/username/my-captcha
+リポジトリ: github.com/Nawadan1215/original-bot-check-v1
 バグ報告: Issues
 コントリビュート: プルリクエスト歓迎！
 
