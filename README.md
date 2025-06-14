@@ -13,10 +13,10 @@ GitHub Pagesでデモを試す！
 以下の手順で、MyCaptchaをあなたのウェブサイトに追加できます！
 1. スクリプトをHTMLに追加
 以下の<script>タグを<head>または<body>に貼り付けます。CDN（jsDelivr）経由で提供しています。
-```<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>```
+`<script src="https://cdn.jsdelivr.net/gh/username/my-captcha@latest/client/mycaptcha.js"></script>`
 
 注: Tailwind CSSを使用しているので、必要に応じて以下も追加してください（オプション）。
-```<script src="https://cdn.tailwindcss.com"></script>```
+`<script src="https://cdn.tailwindcss.com"></script>`
 
 2. HTMLにMyCaptchaを埋め込む
 フォーム内に
