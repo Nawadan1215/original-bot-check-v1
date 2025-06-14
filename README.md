@@ -95,4 +95,4 @@ ID変更: `<div id="mycaptcha">`を任意のIDに変更（例: `MyCaptcha.render
 ライセンス
 MITライセンスのもと、自由に利用・改変・配布可能です。商用利用もOK！
 クレジット
-xAIのGrok 3によって、めっちゃ賢く作られました！😊
+made by @nawadan1215
